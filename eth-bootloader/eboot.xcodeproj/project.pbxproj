@@ -50,9 +50,16 @@
 /* Begin PBXProject section */
 		4079523D0CEA382200E202DC /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 4079523E0CEA382200E202DC /* Build configuration list for PBXProject "TemplateProject" */;
+			buildConfigurationList = 4079523E0CEA382200E202DC /* Build configuration list for PBXProject "eboot" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 4079523B0CEA382200E202DC;
 			projectDirPath = "";
 			projectRoot = "";
@@ -80,7 +87,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4079523E0CEA382200E202DC /* Build configuration list for PBXProject "TemplateProject" */ = {
+		4079523E0CEA382200E202DC /* Build configuration list for PBXProject "eboot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				407952400CEA382200E202DC /* Release */,

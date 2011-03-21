@@ -1,7 +1,14 @@
+Ethernet Bootloader
+==================
+
+Dual bootloader
+===============
+This bootloader was written originally by https://github.com/thseiler and adapted for Arduino Ethernet by David Cuartielles
+
+
+
 Arduino Ethernet board and TFTP Bootloader
 ==========================================
-
-
 
 The Arduino Ethernet board is built by merging a regular Arduino board with the Arduino Ethernet Shield. Therefore, codewise, anything that works on your Arduino plus Ethernet Shield works on this board.
 

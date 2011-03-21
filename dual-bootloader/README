@@ -1,3 +1,4 @@
+# Code Originally from https://github.com/thseiler
 # 20110318 - D. Cuartielles for Arduino
 #            modified files to compile for boards using the Arduino Ethernet Shield as the SD reader                            
 #                                                        
@@ -11,7 +12,7 @@
 #
 # ATTENTION!!! remember the step of copying the EEPROM file to the right folder
 
-2boots
+2boots by https://github.com/thseiler
 ------
 
 This is a dual bootloader for Atmel AVR atmega chips. It combines 
