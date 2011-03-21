@@ -1,0 +1,96 @@
+# 20110318 - D. Cuartielles for Arduino
+#            modified files to compile for boards using the Arduino Ethernet Shield as the SD reader                            
+#                                                        
+#            this works fine for the Arduino Diecimila with the dual booting, for doing the compilation on Linux, use
+#            make clean; cp eeprom/EEPROM_firm.hex .; make diecimila; sudo make diecimila_isp
+#
+#            also adds the keyword "BOX" at the end of the EEPROM for the bootloader to distinguish the name of the 
+#            new versions of the firmware
+#
+#            TODO: make this work for boards with atmega328, also make sure it works with Arduino Uno boards
+#
+# ATTENTION!!! remember the step of copying the EEPROM file to the right folder
+
+2boots
+------
+
+This is a dual bootloader for Atmel AVR atmega chips. It combines 
+a serial bootloader and a mmc/sd card based one in the same 2kb of flash
+memory that is normally used by the arduino serial loader alone.
+
+You might ask Why? Well, I have quite a few arduino "in the field". 
+I can simply drag a .hex file to an SD card, insert it in an SD shield,
+and field-upgrade my boards without additional hardware. At the same time, 
+I can connect the serial port and start developping with the normal Arduino 
+IDE.
+
+Features:
+* Uses just 2kb of flash, so it fits into the normal boot block of most atmegas
+* Serial bootloader is arduino compatible (avrdude / stk500v1)
+* MMC bootloader can read directly a *.hex file
+* Supported are FAT16 formatted cards up to 1GB in size
+* All of ladyada's fixes to the original bootloader are included
+ 
+
+How to build
+------------
+simply install avr-gcc and lib-avr and run on of:
+
+(for atmega168:)
+# make lilypad (8Mhz)
+# make lilypad_resonator (8Mhz)
+# make pro8 (8Mhz)
+# make pro16 (16Mhz)
+# make pro20 (20Mhz)
+# make diecimila (16Mhz)
+# make ng (16Mhz)
+
+(for atmega328:)
+# make atmega328 (16Mhz)
+# make atmega328_pro8 (8Mhz)
+
+there is currently no support for atmega1280
+
+How to flash
+------------
+Connect your board to your ISP programmer of choice,
+Adapt the setting for avrdude in the Makefile (ISPTOOL, ISPPORT, ISPSPEED)
+and append '_isp' to your make command.
+
+I.E. 
+
+# make atmega328       <= compile
+# make atmega328_isp   <= flash
+
+
+How does the MMC/SD stuff work?
+-------------------------------
+
+The SD bootloader is disabled by default. If you want to enable it, 
+you will have to name your board. For this, simply load the included 
+Sketch "NameBoardSketch.pde", change the name you want to assign to
+the board and the run the sketch.
+
+The Sketch simply writes that name to the end of the EEPROM.
+
+If the bootloader finds a name in the EERPOM, it will init the SPI hardware, 
+search for an MMC / SD card and then look for a file that starts with
+board name, and ends in HEX.
+
+If your board is named "SAMPLE", then a file SAMPLE000.hex would work, as
+would SAMPLE001.hex etc...
+
+If no file was found, the bootloader will revert to the serial method.
+
+This allows you to have different firmware for different board on the same
+SD card. It also means that the bootloader will only use the SPI lines
+on boards that are named.
+
+Where can I find the .hex file in the Arduino IDE ?
+---------------------------------------------------
+
+It used to be in the applet folder. This changed with arduino-0018
+Have a look at this thread:
+http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1268011960
+
+
